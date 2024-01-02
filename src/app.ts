@@ -1,15 +1,15 @@
 import express, { Express, Request, Response } from "express";
 import cors from "cors";
-import options from "./utils";
+import { corsOptions } from "./configs";
 
 const app: Express = express();
 const port = process.env.PORT || 3000;
 
-app.use(cors(options));
+app.use(cors(corsOptions));
 app.use(express.json());
 
-app.get("/", (req: Request, res: Response) => {
-  res.send("Express + TypeScript Server");
+app.get("/healthz", (req: Request, res: Response) => {
+  res.status(200).send({message: "OK"});
 });
 
 app.listen(port, () => {
