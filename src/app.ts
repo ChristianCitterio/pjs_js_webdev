@@ -4,6 +4,7 @@ import { corsOptions } from "./configs";
 import { router as categoriesRouter } from "./routers/categoriesRouter";
 import { router as productsRouter } from "./routers/productsRouter";
 import { router as ordersRouter } from "./routers/ordersRouter";
+import { router as usersRouter } from "./routers/usersRouter";
 
 const app: Express = express();
 const port = process.env.PORT || 3000;
@@ -15,9 +16,14 @@ app.get("/healthz", (req: Request, res: Response) => {
   res.status(200).json({message: "OK"});
 });
 
+app.post("/login", (req: Request, res: Response) => {
+  res.json({ message: "Login" });
+});
+
 app.use("/categories", categoriesRouter);
 app.use("/products", productsRouter);
 app.use("/orders", ordersRouter);
+app.use("/users", usersRouter);
 
 app.listen(port, () => {
   console.log(`[server]: Server is running at http://localhost:${port}`);

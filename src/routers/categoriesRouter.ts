@@ -10,7 +10,8 @@ router.post("/new", (req: Request, res: Response) => {
     res.json({ message: "New categories" });
 });
 
-router.route("/:id")
+router
+    .route("/:id")
     .get((req: Request, res: Response) => {
         res.json({ message: "Get id " + req.params.id })
     })

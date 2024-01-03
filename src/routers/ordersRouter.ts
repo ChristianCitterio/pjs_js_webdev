@@ -6,7 +6,8 @@ router.post("/new", (req: Request, res: Response) => {
     res.json({ message: "New order" });
 });
 
-router.route("/:id")
+router
+    .route("/:id")
     .get((req: Request, res: Response) => {
         res.json({ message: "Get id " + req.params.id })
     })

@@ -2,12 +2,8 @@ import express, { Router, Request, Response } from "express";
 
 export const router: Router = express.Router()
 
-router.get("/", (req: Request, res: Response) => {
-    res.json({ message: "List of products" });
-});
-
 router.post("/new", (req: Request, res: Response) => {
-    res.json({ message: "New product" });
+    res.json({ message: "New User" });
 });
 
 router
