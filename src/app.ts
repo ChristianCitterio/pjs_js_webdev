@@ -1,11 +1,11 @@
 import express, { Express, Request, Response } from "express";
 import cors from "cors";
+import jwt from 'jsonwebtoken';
 import { corsOptions } from "./configs";
 import { router as categoriesRouter } from "./routers/categoriesRouter";
 import { router as productsRouter } from "./routers/productsRouter";
 import { router as ordersRouter } from "./routers/ordersRouter";
 import { router as usersRouter } from "./routers/usersRouter";
-import jwt from 'jsonwebtoken';
 import { verifyData, verifyToken } from "./middlewares/loginMiddlewares";
 
 const app: Express = express();
@@ -29,8 +29,6 @@ app.post("/login", (req: Request, res: Response) => {
     res.status(200).json({ token });
   });
 });
-
-app.use(verifyToken, verifyData);
 
 app.use("/categories", categoriesRouter);
 app.use("/products", productsRouter);
