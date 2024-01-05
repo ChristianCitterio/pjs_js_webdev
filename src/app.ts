@@ -5,9 +5,12 @@ import { router as categoriesRouter } from "./routers/categoriesRouter";
 import { router as productsRouter } from "./routers/productsRouter";
 import { router as ordersRouter } from "./routers/ordersRouter";
 import { router as usersRouter } from "./routers/usersRouter";
+import jwt from 'jsonwebtoken';
+import { verifyData, verifyToken } from "./middlewares/loginMiddlewares";
 
 const app: Express = express();
 const port = process.env.PORT || 3000;
+const key = process.env.SECRET_KEY || "secretkey";
 
 app.use(cors(corsOptions));
 app.use(express.json());
@@ -17,8 +20,17 @@ app.get("/healthz", (req: Request, res: Response) => {
 });
 
 app.post("/login", (req: Request, res: Response) => {
-  res.json({ message: "Login" });
+  const testUser = {
+    id: "1",
+    username: "name",
+    password: "as13hnc023inc209"
+  };
+  jwt.sign({ testUser }, key, (err: any, token: any) => {
+    res.status(200).json({ token });
+  });
 });
+
+app.use(verifyToken, verifyData);
 
 app.use("/categories", categoriesRouter);
 app.use("/products", productsRouter);
